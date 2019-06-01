@@ -35,7 +35,7 @@ class ScreepsMemoryStats():
         while True:
             api = self.getScreepsAPI()
 
-            shards = api.get_shards()
+            shards = api.me()['cpuShard'].keys()
             if shards:
                 for shard in shards:
                     try:
