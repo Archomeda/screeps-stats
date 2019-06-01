@@ -50,6 +50,8 @@ class ScreepsMemoryStats():
 
                     # Rate limits
                     time.sleep(60)
+            else:
+                time.sleep(60)
 
     def collectMarketHistory(self, shard):
         screeps = self.getScreepsAPI()
