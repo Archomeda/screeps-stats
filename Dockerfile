@@ -1,12 +1,13 @@
 FROM python:2.7
-MAINTAINER patryk.perduta@gmail.com
 
-RUN git clone https://github.com/Archomeda/screeps-stats.git /screeps-stats
-COPY .screeps_settings.yaml /screeps-stats
 WORKDIR /screeps-stats
-RUN pip install -r requirements.txt
+
 ENV ELASTICSEARCH 1
 
+COPY screeps_etl .
+COPY .screeps_settings.yaml .
+
+RUN pip install -r requirements.txt
 RUN git clone https://github.com/vishnubob/wait-for-it
 
 CMD python screeps_etl/screepsstats.py
