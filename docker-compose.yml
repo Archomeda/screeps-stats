@@ -1,13 +1,14 @@
 version: '2'
 services:
     elasticsearch:
-        image: elasticsearch:6.5.4
+        image: docker.elastic.co/elasticsearch/elasticsearch:7.1.1
         environment:
-            - ES_JAVA_OPTS=-Xms512m -Xmx512m
+            - discovery.type=single-node
+            - "ES_JAVA_OPTS=-Xms384m -Xmx384m"
         volumes:
             - ./esdata:/usr/share/elasticsearch/data
     kibana:
-        image: kibana:6.5.4
+        image: docker.elastic.co/kibana/kibana:7.1.1
         links:
             - elasticsearch
     screeps-stats:
@@ -16,7 +17,7 @@ services:
             - elasticsearch:elasticsearch
         entrypoint: wait-for-it/wait-for-it.sh -t 30 elasticsearch:9200 -- python screeps_etl/screepsstats.py
     nginx:
-        image: nginx:1.9.6
+        image: nginx
         ports:
             - "3000:80"
         links:
