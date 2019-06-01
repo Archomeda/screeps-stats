@@ -175,7 +175,7 @@ class ScreepsMemoryStats():
 
     def collectMemoryStats(self, shard):
         screeps = self.getScreepsAPI()
-        stats = screeps.memory(path='___screeps_stats')
+        stats = screeps.memory('___screeps_stats', shard)
         if 'data' not in stats:
             return False
 
@@ -194,7 +194,7 @@ class ScreepsMemoryStats():
             if isinstance(tick_index, list):
                 rawstring = ''
                 for segment_id in tick_index:
-                    segment = screeps.get_segment(segment=int(segment_id))
+                    segment = screeps.get_segment(int(segment_id), shard)
                     if 'data' in segment and len(segment['data']) > 1:
                         rawstring = segment['data']
                     else:
