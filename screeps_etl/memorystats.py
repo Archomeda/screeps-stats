@@ -235,7 +235,7 @@ class ScreepsMemoryStats():
                     self.es.index(index=indexname, doc_type="stats", body=savedata)
             confirm_queue.append(tick)
 
-        self.confirm(confirm_queue)
+        self.confirm(confirm_queue, shard)
 
     def confirm(self, ticks, shard):
         javascript_clear = 'Stats.removeTick(' + json.dumps(ticks, separators=(',',':')) + ');'
