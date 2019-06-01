@@ -32,21 +32,18 @@ class ScreepsMemoryStats():
     __api = False
 
     def run_forever(self):
-        lastrun = False
         while True:
+            try:
+                self.collectMemoryStats()
+            except Exception as e:
+                print(e)
 
-            self.collectMemoryStats()
-
-            # Market data changes much more rarely so process it less often.
-            if not lastrun or lastrun >= 20:
+            try:
                 self.collectMarketHistory()
-                lastrun = 1
-                # don't pause before next run as market collection adds its own
-                # delays
-                continue
+            except Exception as e:
+                print(e)
 
-            lastrun += 1
-            time.sleep(7)
+            time.sleep(60)
 
     def collectMarketHistory(self):
         screeps = self.getScreepsAPI()
