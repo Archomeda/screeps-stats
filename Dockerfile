@@ -10,4 +10,4 @@ COPY .screeps_settings.yaml .
 RUN pip install -r requirements.txt
 RUN git clone https://github.com/vishnubob/wait-for-it
 
-CMD python screeps_etl/screepsstats.py
+CMD python screepsstats.py
