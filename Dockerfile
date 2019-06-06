@@ -16,6 +16,6 @@ COPY screeps/package.json .
 RUN npm install
 
 COPY screeps .
-COPY .screeps.yaml .
+COPY .screeps.yml .
 
 CMD node index.js
