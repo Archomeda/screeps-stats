@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+const { exec } = require('child_process');
 const { ScreepsAPI } = require('screeps-api');
 const cheerio = require('cheerio');
 const ElasticSearch = require('elasticsearch');
@@ -8,6 +9,12 @@ let esClient;
 let screepsClient;
 
 async function run() {
+    exec('/usr/bin/curator --version', (_, stdout) => {
+        console.log(stdout);
+    });
+
+    setInterval(runCurator, 60 * 60 * 1000);
+
     esClient = new ElasticSearch.Client({
         host: process.env.ELASTICSEARCH ? 'elasticsearch' : 'localhost'
     });
@@ -31,6 +38,15 @@ async function run() {
     }
     screepsClient.socket.subscribe('cpu', onCpu);
     screepsClient.socket.subscribe('console', onConsole);
+}
+
+function runCurator() {
+    exec('/usr/bin/curator --config ./curator.yml ./curator-action.yml', (_, stdout, stderr) => {
+        console.log(stdout);
+        if (stderr) {
+            console.error(stderr);
+        }
+    });
 }
 
 function onConnected() {
