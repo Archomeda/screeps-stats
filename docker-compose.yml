@@ -15,7 +15,7 @@ services:
         build: .
         links:
             - elasticsearch:elasticsearch
-        entrypoint: wait-for-it/wait-for-it.sh -t 60 elasticsearch:9200 -- python screepsstats.py
+        entrypoint: wait-for-it/wait-for-it.sh -t 60 elasticsearch:9200 -- node index.js
     nginx:
         image: nginx
         ports:
