@@ -1,4 +1,4 @@
-FROM node:current-slim
+FROM nikolaik/python-nodejs:python3.6-nodejs12
 
 ENV ELASTICSEARCH=1
 
