@@ -1,16 +1,15 @@
-FROM python:2.7
+FROM nikolaik/python-nodejs:python3.6-nodejs12
 
 ENV ELASTICSEARCH=1
-ENV PYTHONUNBUFFERED=1
 
 WORKDIR /screeps-stats
 
-RUN git clone https://github.com/vishnubob/wait-for-it
+RUN pip install elasticsearch-curator
 
-COPY screeps_etl/requirements.txt .
-RUN pip install -r requirements.txt
+COPY screeps/package.json .
+RUN npm install
 
-COPY screeps_etl .
-COPY .screeps_settings.yaml .
+COPY screeps .
+COPY .screeps.yaml .
 
-CMD python screepsstats.py
+CMD node index.js

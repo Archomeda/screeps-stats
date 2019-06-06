@@ -1,0 +1,18 @@
+# Copy this to .screeps.yml and change it
+servers:
+  main:
+    host: screeps.com
+    secure: true
+    token: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+  # Only server 'main' is supported
+  # ptr:
+  #   host: screeps.com
+  #   secure: true
+  #   token: yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy
+  #   ptr: true
+  # private:
+  #   host: private.server
+  #   secure: true
+  #   port: 443
+  #   username: user
+  #   password: p455w0rd

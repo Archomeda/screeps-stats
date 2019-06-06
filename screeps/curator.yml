@@ -1,0 +1,30 @@
+---
+client:
+  hosts:
+    - elasticsearch
+  port: 9200
+  url_prefix:
+  use_ssl: False
+  certificate:
+  client_cert:
+  client_key:
+  ssl_no_validate: False
+  http_auth:
+  timeout: 30
+  master_only: False
+
+actions:
+  1:
+    action: delete_indices
+    description: Delete indices older than 42 days
+    options:
+      ignore_empty_list: True
+      timeout_override:
+      continue_if_exception: False
+      disable_action: False
+    filters:
+      - filtertype: age
+        source: creation_date
+        direction: older
+        unit: days
+        unit_count: 42
