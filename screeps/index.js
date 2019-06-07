@@ -16,7 +16,7 @@ async function run() {
     setInterval(runCurator, 60 * 60 * 1000);
 
     esClient = new ElasticSearch.Client({
-        host: process.env.ELASTICSEARCH ? 'elasticsearch' : 'localhost'
+        host: process.env.ELASTICSEARCH ? 'elasticsearch:9200' : 'localhost:9200'
     });
     screepsClient = new ScreepsAPI(await ScreepsAPI.fromConfig());
 
