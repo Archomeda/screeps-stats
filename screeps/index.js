@@ -87,20 +87,24 @@ async function onStats(e) {
             continue;
         }
 
-        const message = {
-            timestamp,
-            tick,
-            ...stats[id]
-        };
-        if (shard) {
-            message.shard = shard;
-        }
+        const list = Array.isArray(stats[id]) ? stats[id] : [stats[id]];
 
-        await esClient.index({
-            index: `screeps-stats-${id}-${strftime('%Y-%m-%d')}`,
-            type: 'stats',
-            body: message
-        });
+        for (const item of list) {
+            const message = {
+                timestamp,
+                tick,
+                ...item
+            };
+            if (shard) {
+                message.shard = shard;
+            }
+
+            await esClient.index({
+                index: `screeps-stats-${id}-${strftime('%Y-%m-%d')}`,
+                type: 'stats',
+                body: message
+            });
+        }
     }
 }
 
